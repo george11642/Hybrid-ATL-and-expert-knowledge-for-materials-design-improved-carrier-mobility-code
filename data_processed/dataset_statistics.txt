@@ -1,0 +1,91 @@
+======================================================================
+2D MATERIALS MOBILITY DATASET - STATISTICS REPORT
+======================================================================
+
+Total Materials: 218
+Total Records: 267
+Columns: ['formula', 'electron_mobility', 'hole_mobility', 'bandgap', 'effective_mass_e', 'effective_mass_h', 'source', 'quality_flag', 'n_sources']
+
+DATA SOURCES:
+  - DPT_experimental: 161 materials
+  - C2DB: 25 materials
+  - 10.1103/PhysRevLett.125.177705: 1 materials
+  - eTran2D: 19 materials
+  - 10.1103/PhysRevLett.125.177702: 1 materials
+  - 10.1103/PhysRevLett.125.177721: 1 materials
+  - 10.1103/PhysRevLett.125.177722: 1 materials
+  - 10.1103/PhysRevLett.125.177723: 1 materials
+  - eTran2D + C2DB: 0 materials
+  - 10.1103/PhysRevLett.125.177717: 1 materials
+  - 10.1103/PhysRevLett.125.177718: 1 materials
+  - 10.1103/PhysRevLett.125.177724: 1 materials
+  - 10.1103/PhysRevLett.125.177725: 1 materials
+  - 10.1103/PhysRevLett.125.177726: 1 materials
+  - 10.1103/PhysRevLett.125.177704: 1 materials
+  - 10.1103/PhysRevLett.125.177708: 1 materials
+  - 10.1103/PhysRevLett.125.177709: 1 materials
+  - 10.1103/PhysRevLett.125.177707: 1 materials
+  - 10.1103/PhysRevLett.125.177701: 1 materials
+  - 10.1103/PhysRevLett.125.177711: 1 materials
+  - 10.1103/PhysRevLett.125.177712: 1 materials
+  - 10.1103/PhysRevLett.125.177713: 1 materials
+  - 10.1103/PhysRevLett.125.177714: 1 materials
+  - 10.1103/PhysRevLett.125.177706: 1 materials
+  - 10.1103/PhysRevLett.125.177719: 1 materials
+  - 10.1103/PhysRevLett.125.177720: 1 materials
+  - 10.1103/PhysRevLett.125.177703 + eTran2D + C2DB: 0 materials
+  - 10.1103/PhysRevLett.125.177710: 1 materials
+  - 10.1103/PhysRevLett.125.177715: 1 materials
+  - 10.1103/PhysRevLett.125.177716: 1 materials
+
+QUALITY FLAGS:
+  - experimental: 187 materials
+  - DFT_calculated: 32 materials
+  - experimental + outlier_flag: 0 materials
+  - experimental + DFT_calculated: 0 materials
+
+ELECTRON MOBILITY STATISTICS (cm^2/(V·s)):
+  Count: 218
+  Min: 8.00e-01
+  Max: 1.98e+06
+  Mean: 2.84e+04
+  Median: 1.31e+03
+  Std Dev: 1.46e+05
+
+HOLE MOBILITY STATISTICS (cm^2/(V·s)):
+  Count: 218
+  Min: 2.00e-01
+  Max: 1.60e+06
+  Mean: 2.38e+04
+  Median: 6.13e+02
+  Std Dev: 1.34e+05
+
+BANDGAP STATISTICS (eV):
+  Count: 32
+  Min: 0.36
+  Max: 5.97
+  Mean: 2.02
+  Median: 1.69
+
+SAMPLE MATERIALS:
+   formula  electron_mobility  hole_mobility  bandgap                          source
+0    Ag2S1        2930.000000     540.092585      NaN                DPT_experimental
+1   Ag2Se1        3330.000000     410.121933      NaN                DPT_experimental
+2    Al1P3       52635.359357   14422.610830      NaN                DPT_experimental
+3     AlAs         170.000000     110.000000     2.06                            C2DB
+4      AlN         150.000000     140.000000     4.88                            C2DB
+5      AlP         180.000000     120.000000     2.45                            C2DB
+6       As          49.000000     684.000000      NaN  10.1103/PhysRevLett.125.177705
+7      As1        1040.000000      50.000000      NaN                DPT_experimental
+8    As1B1       27700.000000    9040.000000      NaN                DPT_experimental
+9    As1P1       76518.037740    2606.549443      NaN                DPT_experimental
+10   As2C3      445000.000000    1360.000000      NaN                DPT_experimental
+11   As2S3        1620.990986      36.225827      NaN                DPT_experimental
+12  As2Se3        3468.832657      85.440037      NaN                DPT_experimental
+13  As2Te3         567.274184     240.831892      NaN                DPT_experimental
+14  Au1Se1       10110.000000    3350.731263      NaN                DPT_experimental
+15   Au2S1       30600.000000    2410.000000      NaN                DPT_experimental
+16  Au2Se1       23400.000000    2580.000000      NaN                DPT_experimental
+17   B1As1       69867.351460   36605.163570      NaN                DPT_experimental
+18  B1C2N1       22989.956500    7670.436754      NaN                DPT_experimental
+19  B1N1C1       24906.296390   62773.653710      NaN                DPT_experimental
