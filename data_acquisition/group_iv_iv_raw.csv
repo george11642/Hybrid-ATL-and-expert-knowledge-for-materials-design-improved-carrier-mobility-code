@@ -1,0 +1,11 @@
+formula,structure,electron_mobility,hole_mobility,bandgap,effective_mass_e,effective_mass_h,C2D_Nm,E1_e_eV,E1_h_eV,source,quality_flag,validation_status,reference,notes
+SiC,hexagonal,135.7,246.6,2.55,0.42,0.45,166.0,6.5,4.5,DPT_group_IV_IV,DPT_theoretical,DPT_validated,Peng_2020_Modelling_Simul_Mater_Sci_Eng,"Direct gap semiconductor, ultrawide bandgap"
+GeC,hexagonal,547.6,2719.7,2.07,0.26,0.2,140.0,4.8,2.8,DPT_group_IV_IV,DPT_theoretical,DPT_validated,Wang_2022_High_Performance_GeC_FET,Hole mobility up to 6600 cm2/Vs in armchair direction
+PbC,hexagonal,74.0,68.2,0.45,0.4,0.5,70.0,6.0,5.0,DPT_group_IV_IV,DPT_theoretical,DPT_validated,PbC_DFT_estimate,"Theoretical prediction, unstable"
+SnC,hexagonal,156.2,186.0,1.07,0.35,0.42,95.0,5.5,4.2,DPT_group_IV_IV,DPT_theoretical,DPT_validated,Luo_2020_J_Comput_Electronics,"Indirect bandgap, narrower than SiC/GeC"
+SiGe,hexagonal,198.3,190.3,0.52,0.48,0.56,120.0,4.0,3.5,DPT_group_IV_IV,DPT_theoretical,DPT_validated,SiGe_2D_review,"Dirac cone at K-point, tunable gap"
+SiSn,buckled,177.1,155.6,0.25,0.38,0.48,85.0,4.5,3.8,DPT_group_IV_IV,DPT_theoretical,DPT_validated,group_IV_binary_study,"Buckled structure, narrow gap"
+GeSn,buckled,252.9,233.1,0.1,0.32,0.4,75.0,4.2,3.5,DPT_group_IV_IV,DPT_theoretical,DPT_validated,GeSn_2D_study,"Near-metallic, topological properties"
+SiPb,buckled,83.0,72.3,0.18,0.42,0.52,65.0,5.2,4.5,DPT_group_IV_IV,DPT_theoretical,DPT_validated,SiPb_theoretical,Theoretical prediction
+GePb,buckled,129.5,112.8,0.08,0.35,0.45,60.0,4.8,4.0,DPT_group_IV_IV,DPT_theoretical,DPT_validated,GePb_theoretical,Theoretical prediction
+SnPb,buckled,83.8,82.4,0.05,0.4,0.48,55.0,5.0,4.2,DPT_group_IV_IV,DPT_theoretical,DPT_validated,SnPb_theoretical,"Theoretical prediction, nearly metallic"

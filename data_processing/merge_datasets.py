@@ -98,16 +98,64 @@ def load_c2db_data():
     print("\n" + "="*70)
     print("LOADING C2DB DATA")
     print("="*70)
-    
+
     path = PROJECT_ROOT / 'data_acquisition' / 'c2db_raw.csv'
-    
+
     if not path.exists():
         print(f"Warning: {path} not found. Skipping C2DB.")
         return pd.DataFrame()
-    
+
     try:
         df = pd.read_csv(path)
         print(f"Loaded C2DB data: {len(df)} records")
+        return df
+    except Exception as e:
+        print(f"Error reading {path}: {e}")
+        return pd.DataFrame()
+
+
+def load_expanded_c2db_data():
+    """Load expanded C2DB data including high-mobility materials."""
+    print("\n" + "="*70)
+    print("LOADING EXPANDED C2DB DATA")
+    print("="*70)
+
+    path = PROJECT_ROOT / 'data_acquisition' / 'c2db_expanded.csv'
+
+    if not path.exists():
+        print(f"Warning: {path} not found. Skipping expanded C2DB.")
+        return pd.DataFrame()
+
+    try:
+        df = pd.read_csv(path)
+        print(f"Loaded expanded C2DB data: {len(df)} records")
+        return df
+    except Exception as e:
+        print(f"Error reading {path}: {e}")
+        return pd.DataFrame()
+
+
+def load_group_iv_iv_data():
+    """Load Group IV-IV materials (SiC family) data."""
+    print("\n" + "="*70)
+    print("LOADING GROUP IV-IV MATERIALS DATA")
+    print("="*70)
+
+    path = PROJECT_ROOT / 'data_acquisition' / 'group_iv_iv_raw.csv'
+
+    if not path.exists():
+        print(f"Warning: {path} not found. Skipping Group IV-IV.")
+        return pd.DataFrame()
+
+    try:
+        df = pd.read_csv(path)
+        # Standardize columns
+        df = df.rename(columns={
+            'C2D_Nm': 'C2D',
+            'E1_e_eV': 'E1_e',
+            'E1_h_eV': 'E1_h'
+        })
+        print(f"Loaded Group IV-IV data: {len(df)} records")
         return df
     except Exception as e:
         print(f"Error reading {path}: {e}")
@@ -365,47 +413,51 @@ def main():
     print("\n" + "="*70)
     print("PHASE 1: DATA ACQUISITION AND INTEGRATION")
     print("="*70)
-    
+
     # Load all datasets
     dpt_df = load_existing_dpt_data()
     epc_df = load_existing_epc_data()
     etran2d_df = load_etran2d_data()
     c2db_df = load_c2db_data()
-    
+    expanded_c2db_df = load_expanded_c2db_data()
+    group_iv_iv_df = load_group_iv_iv_data()
+
     # Standardize formats
     print("\n" + "="*70)
     print("STANDARDIZING FORMATS")
     print("="*70)
-    
+
     dpt_standardized = standardize_dpt_format(dpt_df)
     print(f"DPT standardized: {len(dpt_standardized)} records")
-    
+
     epc_standardized = standardize_epc_format(epc_df)
     print(f"EPC standardized: {len(epc_standardized)} records")
-    
+
     # Merge all datasets
     datasets_dict = {
         'DPT': dpt_standardized,
         'EPC': epc_standardized,
         'eTran2D': etran2d_df,
         'C2DB': c2db_df,
+        'C2DB_expanded': expanded_c2db_df,
+        'Group_IV_IV': group_iv_iv_df,
     }
-    
+
     merged_df = merge_dataframes(datasets_dict)
-    
+
     # Validate and clean
     cleaned_df = validate_and_clean(merged_df)
-    
+
     # Save results
     save_merged_dataset(cleaned_df)
     generate_statistics_report(cleaned_df)
-    
+
     print("\n" + "="*70)
     print("PHASE 1 COMPLETE!")
     print("="*70)
     print(f"\nFinal dataset: {len(cleaned_df)} unique 2D materials")
     print(f"Ready for Phase 2: Feature Engineering")
-    
+
     return cleaned_df
 
 if __name__ == '__main__':

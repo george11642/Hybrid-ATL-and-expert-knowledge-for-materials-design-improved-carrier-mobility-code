@@ -211,16 +211,17 @@ if __name__ == '__main__':
     print("="*80)
     
     # Predict for actual 2D SiC Monolayer
-    print("\nPredicting for 2D SiC Monolayer (C2DB parameters)...")
-    
-    # Actual 2D SiC parameters from C2DB database
-    # Bandgap: 2.39 eV (from C2DB)
-    # Electron effective mass: 0.42 m0 (from C2DB)
-    # Hole effective mass: 0.45 m0 (from C2DB)
-    
+    print("\nPredicting for 2D SiC Monolayer...")
+
+    # 2D SiC parameters from group_iv_iv_raw.csv (Peng 2020)
+    # Bandgap: 2.55 eV (direct gap, hexagonal structure)
+    # Electron effective mass: 0.42 m0
+    # Hole effective mass: 0.45 m0
+    # These are consistent with DPT calculations in the training data
+
     result = predict_mobility(
         material_name="2D SiC Monolayer",
-        bandgap=2.39,
+        bandgap=2.55,
         m_e=0.42,
         m_h=0.45
     )

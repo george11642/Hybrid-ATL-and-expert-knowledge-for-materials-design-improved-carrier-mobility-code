@@ -1,0 +1,10 @@
+
+# Manuscript (not for public repo)
+manuscript/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Temp files
+nul

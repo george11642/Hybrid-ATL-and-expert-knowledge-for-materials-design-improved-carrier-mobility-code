@@ -157,6 +157,15 @@ def train_and_save_models():
     removed = initial_count - len(df_complete)
     print(f"[OK] Removed {removed} outliers, {len(df_complete)} remaining")
 
+    # CRITICAL: Remove SiC from training data - we want to PREDICT its mobility
+    print("\n[*] Removing SiC from training data (target for prediction)...")
+    sic_mask = df_complete['formula'].str.contains('SiC', case=False, na=False)
+    sic_removed = df_complete[sic_mask]
+    if len(sic_removed) > 0:
+        print(f"    Excluded materials: {sic_removed['formula'].tolist()}")
+    df_complete = df_complete[~sic_mask].copy()
+    print(f"[OK] Removed {sic_mask.sum()} SiC entries, {len(df_complete)} remaining")
+
     print(f"\n[OK] Final dataset: {len(df_complete)} materials with complete features")
     print("\n    Data sources:")
     for src, cnt in df_complete['source'].value_counts().items():

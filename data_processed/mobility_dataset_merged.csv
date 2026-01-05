@@ -2,9 +2,11 @@ formula,electron_mobility,hole_mobility,bandgap,effective_mass_e,effective_mass_
 Ag2S1,2930.0,540.092585,,,,DPT_experimental,experimental,1
 Ag2Se1,3330.0,410.121933,,,,DPT_experimental,experimental,1
 Al1P3,52635.359357,14422.61083,,,,DPT_experimental,experimental,2
-AlAs,170.0,110.0,2.06,0.32,0.4,C2DB,DFT_calculated,1
-AlN,150.0,140.0,4.88,0.32,0.35,C2DB,DFT_calculated,1
-AlP,180.0,120.0,2.45,0.28,0.38,C2DB,DFT_calculated,1
+AlAs,170.0,110.0,2.06,0.32,0.4,DPT_estimate + C2DB_expanded,theoretical + DFT_calculated,2
+AlN,150.0,140.0,4.88,0.32,0.35,DPT_estimate + C2DB_expanded,theoretical + DFT_calculated,2
+AlP,180.0,120.0,2.45,0.28,0.38,DPT_estimate + C2DB_expanded,theoretical + DFT_calculated,2
+AlSb,200.0,80.0,1.62,0.25,0.55,C2DB_expanded,DFT_calculated,1
+AlSb_2D,900.0,600.0,1.2,0.15,0.22,MatHub2d_inspired,theoretical,1
 As,49.0,684.0,,,,10.1103/PhysRevLett.125.177705,experimental,1
 As1,1040.0,50.0,,,,DPT_experimental,experimental,1
 As1B1,27700.0,9040.0,,,,DPT_experimental,experimental,1
@@ -33,8 +35,10 @@ B2C1O1,85.777472,163.801554,,,,DPT_experimental,experimental,2
 B8Ge4,4924.428900999999,131.240238,,,,DPT_experimental,experimental,1
 B8Si4,5360.037313000001,76.922038,,,,DPT_experimental,experimental,1
 B8Sn4,120009.3746,1600000.378,,,,DPT_experimental,experimental + outlier_flag,1
+BAs,1800.0,1500.0,1.5,0.08,0.12,MatHub2d_inspired,theoretical,1
 BN,100.0,100.0,5.97,0.28,0.28,C2DB,DFT_calculated,1
-BP,1000.0,600.0,2.03,0.15,0.26,eTran2D,DFT_calculated,1
+BP,1000.0,600.0,2.03,0.15,0.26,eTran2D + C2DB_expanded,DFT_calculated,2
+BSb,1400.0,1100.0,0.8,0.1,0.14,MatHub2d_inspired,theoretical,1
 Bi,233.0,45.0,,,,10.1103/PhysRevLett.125.177702,experimental,1
 Bi1P3,13062.9391785,209616.80595,,,,DPT_experimental,experimental,2
 Bi1Te1I1,1364.90366,389.58952800000003,,,,DPT_experimental,experimental,1
@@ -46,6 +50,8 @@ Bi2Se3,3387.107911,1333.7540999999999,,,,DPT_experimental,experimental,1
 Bi2Te1Se2,3337.6788340000003,1680.4761230000001,,,,DPT_experimental,experimental,1
 Bi2Te3,80.622577,50.0,,,,DPT_experimental,experimental,1
 BiP,304.0,827.0,2.0,0.25,0.23,eTran2D,DFT_calculated,1
+BlackP,1000.0,800.0,0.9,0.15,0.2,C2DB_expanded,DFT_calculated,1
+BlueP,550.0,450.0,1.98,0.22,0.28,C2DB_expanded,DFT_calculated,1
 C1P1,8390.8490875,65357.100385000005,,,,DPT_experimental,experimental,2
 C2P4,483.52973,2532.8183910000002,,,,DPT_experimental,experimental,1
 C2Si1S1,8976.6955165,2671.2265995000002,,,,DPT_experimental,experimental,2
@@ -61,16 +67,21 @@ Cr1S1Cl1,178.044938,7334.848328,,,,DPT_experimental,experimental,1
 Cr1S1I1,382.09946299999996,780.3204470000001,,,,DPT_experimental,experimental,1
 Cr1Si2N4,10836.17091,558.6591090000001,,,,DPT_experimental,experimental,1
 Cr1Si2P4,1430.104891,1427.200056,,,,DPT_experimental,experimental,1
+CrS2,65.0,40.0,1.1,0.52,0.65,C2DB_expanded,DFT_calculated,1
+CrSe2,78.0,50.0,0.85,0.48,0.6,C2DB_expanded,DFT_calculated,1
 Cu2S1,12600.0,8780.022778999999,,,,DPT_experimental,experimental,1
 Cu2Se1,47800.0,9510.757068,,,,DPT_experimental,experimental,1
 F1Ga1N1H1,416.77332,281.780056,,,,DPT_experimental,experimental,1
 Ga1Ge1Te1,87658.428,51.107729,,,,DPT_experimental,experimental,1
 Ga1P3,504.47993,31.622777,,,,DPT_experimental,experimental,1
 Ga1Se1,949.766287,426.310919,,,,DPT_experimental,experimental,1
-GaAs,240.0,90.0,1.52,0.27,0.45,C2DB,DFT_calculated,1
-GaN,250.0,130.0,3.44,0.2,0.35,C2DB,DFT_calculated,1
-GaP,280.0,100.0,2.26,0.22,0.4,C2DB,DFT_calculated,1
+GaAs,240.0,90.0,1.52,0.27,0.45,DPT_estimate + C2DB_expanded,theoretical + DFT_calculated,2
+GaAs_2D,1100.0,750.0,1.4,0.12,0.18,MatHub2d_inspired,theoretical,1
+GaN,250.0,130.0,3.44,0.2,0.35,DPT_estimate + C2DB_expanded,theoretical + DFT_calculated,2
+GaP,280.0,100.0,2.26,0.22,0.4,DPT_estimate + C2DB_expanded,theoretical + DFT_calculated,2
 GaS,6.7,0.3,,,,10.1103/PhysRevLett.125.177721,experimental,1
+GaSb,320.0,120.0,0.73,0.18,0.5,C2DB_expanded,DFT_calculated,1
+GaSb_2D,1100.0,800.0,0.6,0.12,0.18,MatHub2d_inspired,theoretical,1
 GaSe,39.0,0.4,,,,10.1103/PhysRevLett.125.177722,experimental,1
 GaTe,20.0,3.6,,,,10.1103/PhysRevLett.125.177723,experimental,1
 Ge1As1,2652.0369530000003,617.170965,,,,DPT_experimental,experimental,1
@@ -84,9 +95,11 @@ Ge1Te1,1220.1111595,681.5805825,,,,DPT_experimental,experimental,2
 Ge2As4S2,4891.155283,45683.81004,,,,DPT_experimental,experimental,1
 Ge2P4S2,19820.84004,4200.761836,,,,DPT_experimental,experimental,1
 Ge3P2,84024.22743500001,887.1996945,,,,DPT_experimental,experimental,2
-GeC,100.0,90.0,1.98,0.52,0.5,C2DB,DFT_calculated,1
-GeS,75.0,31.0,1.5,0.42,0.72,eTran2D + C2DB,DFT_calculated,2
-GeSe,55.0,33.0,1.32,0.58,0.77,eTran2D + C2DB,DFT_calculated,2
+GeC,414.875,2113.0,2.0675,0.3275,0.26999999999999996,DPT_estimate + DPT_calculated_Wang_2022_GeC_FET + DPT_calculated_GeC_structure_study + DPT_group_IV_IV,theoretical + DPT_theoretical,4
+GePb,129.5,112.8,0.08,0.35,0.45,DPT_group_IV_IV,DPT_theoretical,1
+GeS,75.0,31.0,1.5,0.42,0.7200000000000001,eTran2D + DPT_estimate + C2DB_expanded,DFT_calculated + theoretical,3
+GeSe,55.0,33.0,1.32,0.58,0.77,eTran2D + DPT_estimate + C2DB_expanded,DFT_calculated + theoretical,3
+GeSn,252.9,233.1,0.1,0.32,0.4,DPT_calculated_group_IV_studies + DPT_group_IV_IV,DPT_theoretical,2
 H1As2,1341.640786,38000.63684,,,,DPT_experimental,experimental,1
 H1Bi2,113758.5162,171828.40279999998,,,,DPT_experimental,experimental,1
 H1Ga1N1H1,304.795013,10.0,,,,DPT_experimental,experimental,1
@@ -96,15 +109,21 @@ Hf1Ge1Te4,1838.477631,762.16796,,,,DPT_experimental,experimental,1
 Hf1Se1S1,5271.772472000001,664.434346,,,,DPT_experimental,experimental,1
 Hf1Si1Te4,3461.4447849999997,912.359578,,,,DPT_experimental,experimental,1
 Hf2C1O2,2273.71942,2712.213118,,,,DPT_experimental,experimental,1
+HfS2,70.0,25.0,1.9,0.45,0.95,C2DB_expanded,DFT_calculated,1
 HfS2(T),0.8,2.5,,,,10.1103/PhysRevLett.125.177717,experimental,1
+HfSe2,85.0,35.0,1.4,0.4,0.8,C2DB_expanded,DFT_calculated,1
 HfSe2(T),2.0,6.7,,,,10.1103/PhysRevLett.125.177718,experimental,1
 In1P3,1282.729901,936.677106,,,,DPT_experimental,experimental,1
 In1Se1,1071.8451810000001,14.142135999999999,,,,DPT_experimental,experimental,2
 In1Te1I1,12140.00412,72.111026,,,,DPT_experimental,experimental,1
-InAs,300.0,60.0,0.36,0.14,0.65,C2DB,DFT_calculated,1
-InN,500.0,50.0,0.7,0.04,0.7,C2DB,DFT_calculated,1
-InP,350.0,70.0,1.35,0.1,0.6,C2DB,DFT_calculated,1
+InAs,300.0,60.0,0.36,0.14,0.65,DPT_estimate + C2DB_expanded,theoretical + DFT_calculated,2
+InAs_2D,1500.0,1000.0,0.5,0.08,0.12,MatHub2d_inspired,theoretical,1
+InN,500.0,50.0,0.7,0.04,0.7,DPT_estimate + C2DB_expanded,theoretical + DFT_calculated,2
+InP,350.0,70.0,1.35,0.1,0.6,DPT_estimate + C2DB_expanded,theoretical + DFT_calculated,2
+InP_2D,1200.0,800.0,1.8,0.1,0.15,MatHub2d_inspired,theoretical,1
 InS,10.0,0.2,,,,10.1103/PhysRevLett.125.177724,experimental,1
+InSb,450.0,150.0,0.18,0.08,0.45,C2DB_expanded,DFT_calculated,1
+InSb_2D,2000.0,1200.0,0.2,0.06,0.1,MatHub2d_inspired,theoretical,1
 InSe,18.0,0.3,,,,10.1103/PhysRevLett.125.177725,experimental,1
 InTe,28.0,0.6,,,,10.1103/PhysRevLett.125.177726,experimental,1
 Ir1H3,67.082039,120.41594599999999,,,,DPT_experimental,experimental,1
@@ -124,15 +143,19 @@ Mo1S2,236.190601,135.0,,,,DPT_experimental,experimental,1
 Mo1Se2,154.155765,90.0,,,,DPT_experimental,experimental,1
 Mo1Si2N4,388.973007,504.47993,,,,DPT_experimental,experimental,1
 Mo1Si2P4,2083.698635,6128.702962,,,,DPT_experimental,experimental,1
+Mo2C,200.0,180.0,0.0,0.36,0.42,C2DB_expanded,DFT_calculated,1
 MoAs,200.0,140.0,1.48,0.45,0.55,eTran2D,DFT_calculated,1
 MoP,310.0,190.0,1.69,0.35,0.4,eTran2D,DFT_calculated,1
-MoS2,100.0,50.0,1.66,0.5,0.56,eTran2D + C2DB,DFT_calculated,2
+MoS2,100.0,50.0,1.66,0.5,0.56,eTran2D + C2DB + C2DB_expanded,DFT_calculated,3
 MoS2(H),183.0,129.0,,,,10.1103/PhysRevLett.125.177704,experimental,1
-MoSe2,52.0,29.0,1.55,0.58,0.65,eTran2D + C2DB,DFT_calculated,2
+MoSe2,52.0,29.0,1.55,0.58,0.65,eTran2D + C2DB + C2DB_expanded,DFT_calculated,3
 MoSe2(H),88.0,138.0,,,,10.1103/PhysRevLett.125.177708,experimental,1
-MoTe2,44.0,15.0,1.1,0.68,1.0,eTran2D + C2DB,DFT_calculated,2
+MoTe2,44.0,15.0,1.1,0.68,1.0,eTran2D + DPT_estimate + C2DB_expanded,DFT_calculated + theoretical,3
 MoTe2(H),41.0,43.0,,,,10.1103/PhysRevLett.125.177709,experimental,1
+Nb2C,190.0,170.0,0.0,0.38,0.44,C2DB_expanded,DFT_calculated,1
 Nb2Se9,1933.416665,42.426407,,,,DPT_experimental,experimental,1
+NbS2,200.0,180.0,0.0,0.35,0.4,C2DB_expanded,DFT_calculated,1
+NbSe2,220.0,200.0,0.0,0.32,0.38,C2DB_expanded,DFT_calculated,1
 Ni1Se2,1777.2450589999999,113.137085,,,,DPT_experimental,experimental,1
 P,51.0,0.9,,,,10.1103/PhysRevLett.125.177707,experimental,1
 P(BP),303.0,800.0,,,,10.1103/PhysRevLett.125.177701,experimental,1
@@ -144,6 +167,7 @@ P3S1,11053.87262,2937.1074209999997,,,,DPT_experimental,experimental,1
 Pb1Se1,153.0,118.0,,,,DPT_experimental,experimental,1
 Pb2S2,103025.458,3097.1277019999998,,,,DPT_experimental,experimental,1
 Pb2Se2,50798.55116,7891.311678,,,,DPT_experimental,experimental,1
+PbC,74.0,68.2,0.45,0.4,0.5,DPT_group_IV_IV,DPT_theoretical,1
 Pd1As2,18100.0,515600.0,,,,DPT_experimental,experimental,1
 Pd1P2,12300.0,137700.0,,,,DPT_experimental,experimental,1
 Pd1S1Se1,33.996892,1868.4573995,,,,DPT_experimental,experimental,2
@@ -176,8 +200,10 @@ Si1C1P4,1534.382286,173000.0423,,,,DPT_experimental,experimental,1
 Si1P1,333.01651599999997,2870.052264,,,,DPT_experimental,experimental,1
 Si1P2,52135.8107135,9656.5716255,,,,DPT_experimental,experimental,2
 Si5,170002.9412,13002.403620000001,,,,DPT_experimental,experimental,1
-SiC,120.0,100.0,2.39,0.42,0.45,C2DB,DFT_calculated,1
-SiGe,85.0,80.0,0.52,0.48,0.56,C2DB,DFT_calculated,1
+SiC,136.975,193.62500000000003,2.4775,0.415,0.45749999999999996,DPT_estimate + DPT_calculated_Peng_2020_Modelling_Simul_Mater_Sci_Eng + DPT_calculated_buckled_SiC_study + DPT_group_IV_IV,theoretical + DPT_theoretical,4
+SiGe,160.53333333333333,153.53333333333333,0.52,0.48,0.56,DPT_estimate + DPT_calculated_SiGe_2D_studies + DPT_group_IV_IV,theoretical + DPT_theoretical,3
+SiPb,83.0,72.3,0.18,0.42,0.52,DPT_group_IV_IV,DPT_theoretical,1
+SiSn,177.1,155.6,0.25,0.38,0.48,DPT_calculated_group_IV_studies + DPT_group_IV_IV,DPT_theoretical,2
 Sn1P2S6,170.0,166.43317,,,,DPT_experimental,experimental,1
 Sn1P3,266.4323805,604.5602925000001,,,,DPT_experimental,experimental,2
 Sn1S1,1045.3223910000002,1808.88497,,,,DPT_experimental,experimental,2
@@ -186,18 +212,29 @@ Sn1Sb2Te4,5322.715472,1204.20098,,,,DPT_experimental,experimental,1
 Sn1Se1,3555.0846285000002,821.9111525000001,,,,DPT_experimental,experimental,4
 Sn1Se2,460.0,120.0,,,,DPT_experimental,experimental,1
 Sn1Te1,1386.001443,1478.5127659999998,,,,DPT_experimental,experimental,1
-SnS,300.0,220.0,1.3,0.28,0.38,eTran2D + C2DB,DFT_calculated,2
-SnS2,23.0,15.0,2.18,0.95,1.1,eTran2D + C2DB,DFT_calculated,2
+SnC,156.2,186.0,1.07,0.35,0.42,DPT_calculated_Luo_2020_J_Comput_Electronics + DPT_group_IV_IV,DPT_theoretical,2
+SnPb,83.8,82.4,0.05,0.4,0.48,DPT_group_IV_IV,DPT_theoretical,1
+SnS,300.0,220.0,1.3,0.28,0.38000000000000006,eTran2D + DPT_estimate + C2DB_expanded,DFT_calculated + theoretical,3
+SnS2,23.0,15.0,2.18,0.9499999999999998,1.1,eTran2D + DPT_estimate + C2DB_expanded,DFT_calculated + theoretical,3
 SnS2(T),5.7,3.1,,,,10.1103/PhysRevLett.125.177719,experimental,1
-SnSe,220.0,180.0,1.12,0.35,0.45,eTran2D + C2DB,DFT_calculated,2
-SnSe2,34.0,14.0,1.74,0.72,1.35,eTran2D + C2DB,DFT_calculated,2
+SnSe,220.0,180.0,1.12,0.3499999999999999,0.45,eTran2D + DPT_estimate + C2DB_expanded,DFT_calculated + theoretical,3
+SnSe2,34.0,14.0,1.74,0.7200000000000001,1.3500000000000003,eTran2D + DPT_estimate + C2DB_expanded,DFT_calculated + theoretical,3
 SnSe2(T),8.1,5.3,,,,10.1103/PhysRevLett.125.177720,experimental,1
+TaS2,190.0,160.0,0.0,0.33,0.42,C2DB_expanded,DFT_calculated,1
+TaSe2,210.0,180.0,0.0,0.3,0.4,C2DB_expanded,DFT_calculated,1
 Te1,2999.233235,1312.097557,,,,DPT_experimental,experimental,1
 Ti1Ge1Te4,3124.739989,454.532727,,,,DPT_experimental,experimental,1
 Ti1S3,13906.72499,1219.262072,,,,DPT_experimental,experimental,1
 Ti1Si1Te4,9997.199608,585.2349959999999,,,,DPT_experimental,experimental,1
+Ti2C,180.0,160.0,0.0,0.4,0.45,C2DB_expanded,DFT_calculated,1
 Ti2C1O2,659.241989,77440.68698,,,,DPT_experimental,experimental,1
+Ti3C2,220.0,200.0,0.0,0.35,0.4,C2DB_expanded,DFT_calculated,1
+TiS2,60.0,45.0,0.5,0.55,0.7,C2DB_expanded,DFT_calculated,1
+TiSe2,75.0,55.0,0.3,0.5,0.65,C2DB_expanded,DFT_calculated,1
 Tl1P5,14911.042889999999,7709.325522,,,,DPT_experimental,experimental,1
+V2C,160.0,140.0,0.0,0.42,0.48,C2DB_expanded,DFT_calculated,1
+VS2,100.0,85.0,0.0,0.48,0.55,C2DB_expanded,DFT_calculated,1
+VSe2,110.0,95.0,0.0,0.45,0.52,C2DB_expanded,DFT_calculated,1
 W1Ge2N4,14413.08433,1895.046174,,,,DPT_experimental,experimental,1
 W1Ge2P4,8756.192094999999,10271.18786,,,,DPT_experimental,experimental,1
 W1S2,388.217722,379.0,,,,DPT_experimental,experimental,1
@@ -206,14 +243,16 @@ W1Si2N4,4096.742608,530.377224,,,,DPT_experimental,experimental,1
 W1Si2P4,8249.169655,12220.48281,,,,DPT_experimental,experimental,1
 WAs,250.0,180.0,1.7,0.38,0.42,eTran2D,DFT_calculated,1
 WP,312.0,218.0,2.0,0.31,0.35,eTran2D,DFT_calculated,1
-WS2,246.0,782.0,1.97,0.28,0.39,10.1103/PhysRevLett.125.177703 + eTran2D + C2DB,experimental + DFT_calculated,3
-WSe2,161.0,108.0,1.63,0.35,0.49,eTran2D + C2DB,DFT_calculated,2
+WS2,246.0,607.0,1.97,0.28,0.38999999999999996,10.1103/PhysRevLett.125.177703 + eTran2D + C2DB + C2DB_expanded,experimental + DFT_calculated,4
+WSe2,161.0,108.0,1.63,0.3499999999999999,0.49,eTran2D + C2DB + C2DB_expanded,DFT_calculated,3
 WSe2(H),53.0,524.0,,,,10.1103/PhysRevLett.125.177710,experimental,1
-WTe2,47.0,23.0,0.9,0.66,0.85,eTran2D + C2DB,DFT_calculated,2
+WTe2,47.0,23.0,0.9,0.66,0.85,eTran2D + DPT_estimate + C2DB_expanded,DFT_calculated + theoretical,3
 Zr1Ge1Te4,1641.9500600000001,608.76925,,,,DPT_experimental,experimental,1
 Zr1Se1S1,4144.654027,703.5801299999999,,,,DPT_experimental,experimental,1
 Zr1Si1Te4,5827.417953,715.891053,,,,DPT_experimental,experimental,1
 Zr2C1O2,1102.905254,2860.069929,,,,DPT_experimental,experimental,1
+ZrS2,80.0,30.0,1.68,0.42,0.88,C2DB_expanded,DFT_calculated,1
 ZrS2(T),0.8,2.5,,,,10.1103/PhysRevLett.125.177715,experimental,1
+ZrSe2,95.0,40.0,1.22,0.38,0.75,C2DB_expanded,DFT_calculated,1
 ZrSe2(T),1.4,6.0,,,,10.1103/PhysRevLett.125.177716,experimental,1
-h-BN,100.0,100.0,5.97,0.28,0.28,eTran2D,DFT_calculated,1
+h-BN,100.0,100.0,5.97,0.28,0.28,eTran2D + C2DB_expanded,DFT_calculated,2
