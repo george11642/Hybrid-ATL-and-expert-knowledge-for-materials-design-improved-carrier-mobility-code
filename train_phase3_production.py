@@ -33,7 +33,7 @@ RESULTS_DIR = "evaluation/phase3"
 MAX_MOBILITY_OUTLIER = 500000
 USE_LOG_TRANSFORM = True
 ENHANCE_FEATURES = True
-N_FOLDS = 20
+N_FOLDS = 5  # Reduced from 20 due to smaller dataset (32 samples)
 
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 os.makedirs(RESULTS_DIR, exist_ok=True)
@@ -43,92 +43,83 @@ os.makedirs(RESULTS_DIR, exist_ok=True)
 # ============================================================================
 
 def engineer_features(row, use_interactions=True):
-    """Engineer 60D feature set with interaction terms"""
-    features = np.zeros(60)
-    
+    """
+    Engineer feature set from INPUT variables only.
+
+    IMPORTANT: Only uses bandgap (eg), effective_mass_e (m_e), effective_mass_h (m_h).
+    Does NOT use electron_mobility or hole_mobility (the targets) to avoid data leakage.
+    """
+    features = np.zeros(45)
+
     try:
+        # Input features ONLY - no target variables!
         eg = row['bandgap'] if pd.notna(row['bandgap']) else 1.5
         m_e = row['effective_mass_e'] if pd.notna(row['effective_mass_e']) else 0.5
         m_h = row['effective_mass_h'] if pd.notna(row['effective_mass_h']) else 0.5
-        mu_e = row['electron_mobility']
-        mu_h = row['hole_mobility']
-        
+
+        # Core features (0-11): Basic properties and ratios
         features[0] = eg
         features[1] = m_e
         features[2] = m_h
-        features[3] = mu_e / (mu_h + 1e-6)
-        features[4] = m_e / (m_h + 1e-6)
-        features[5] = 1.0 / (m_e + m_h + 1e-6)
-        features[6] = eg ** 2
-        features[7] = m_e * m_h
-        features[8] = (m_e + m_h) / 2
-        features[9] = max(m_e, m_h) - min(m_e, m_h)
-        features[10] = eg * m_e
-        features[11] = eg * m_h
-        features[12] = eg / (m_e + m_h + 1e-6)
-        features[13] = np.log(mu_e + 1)
-        features[14] = np.log(mu_h + 1)
-        
+        features[3] = m_e / (m_h + 1e-6)
+        features[4] = 1.0 / (m_e + m_h + 1e-6)
+        features[5] = eg ** 2
+        features[6] = m_e * m_h
+        features[7] = (m_e + m_h) / 2
+        features[8] = max(m_e, m_h) - min(m_e, m_h)
+        features[9] = eg * m_e
+        features[10] = eg * m_h
+        features[11] = eg / (m_e + m_h + 1e-6)
+
         if use_interactions:
-            features[15] = eg * m_e * m_h
-            features[16] = eg ** 2 * m_e
-            features[17] = eg ** 2 * m_h
-            features[18] = eg / m_e
-            features[19] = eg / m_h
-            
-            features[20] = m_e ** 2
-            features[21] = m_h ** 2
-            features[22] = (m_e ** 2 + m_h ** 2) / 2
-            features[23] = (m_e * m_h) ** 0.5
-            features[24] = m_e / (m_h ** 2 + 1e-6)
-            
-            features[25] = mu_e / (m_e + 1e-6)
-            features[26] = mu_h / (m_h + 1e-6)
-            features[27] = mu_e * mu_h / ((m_e + m_h) ** 2 + 1e-6)
-            features[28] = np.log(mu_e * mu_h + 1)
-            features[29] = (mu_e + mu_h) / 2
-            
-            features[30] = eg ** 3
-            features[31] = m_e ** 3 + m_h ** 3
-            features[32] = (m_e + m_h) ** 2
-            features[33] = eg * (m_e + m_h) ** 2
-            features[34] = eg ** 2 / ((m_e + m_h) ** 2 + 1e-6)
-            
-            features[35] = 1.0 / (1.0 + np.exp(-eg))
-            features[36] = np.exp(-m_e)
-            features[37] = np.exp(-m_h)
-            features[38] = np.sin(eg)
-            features[39] = np.cos(m_e)
-            
-            features[40] = m_e ** (1/3)
-            features[41] = m_h ** (1/3)
-            features[42] = eg ** (1/2)
-            features[43] = (m_e * eg) / (m_h + 1e-6)
-            features[44] = (m_h * eg) / (m_e + 1e-6)
-            
-            features[45] = (m_e + m_h) * eg
-            features[46] = (m_e + m_h) / eg
-            features[47] = m_e * eg + m_h * eg
-            features[48] = m_e / eg + m_h / eg
-            features[49] = (m_e + m_h) * (eg ** 2)
-            
-            features[50] = m_e * np.exp(-eg)
-            features[51] = m_h * np.exp(-eg)
-            features[52] = eg * np.exp(-(m_e + m_h))
-            features[53] = (m_e + m_h) / np.log(eg + 1.01)
-            features[54] = eg / np.log(m_e + m_h + 1.01)
-            
-            features[55:60] = [
-                np.log(1 + m_e * m_h),
-                np.log(1 + eg * (m_e + m_h)),
-                eg ** 2.5,
-                (m_e + m_h) ** 1.5,
-                (m_e * m_h) ** 0.75
-            ]
-    
+            # Polynomial interactions (12-21)
+            features[12] = eg * m_e * m_h
+            features[13] = eg ** 2 * m_e
+            features[14] = eg ** 2 * m_h
+            features[15] = eg / (m_e + 1e-6)
+            features[16] = eg / (m_h + 1e-6)
+            features[17] = m_e ** 2
+            features[18] = m_h ** 2
+            features[19] = (m_e ** 2 + m_h ** 2) / 2
+            features[20] = (m_e * m_h) ** 0.5
+            features[21] = m_e / (m_h ** 2 + 1e-6)
+
+            # Higher order terms (22-26)
+            features[22] = eg ** 3
+            features[23] = m_e ** 3 + m_h ** 3
+            features[24] = (m_e + m_h) ** 2
+            features[25] = eg * (m_e + m_h) ** 2
+            features[26] = eg ** 2 / ((m_e + m_h) ** 2 + 1e-6)
+
+            # Nonlinear transforms (27-31)
+            features[27] = 1.0 / (1.0 + np.exp(-eg))
+            features[28] = np.exp(-m_e)
+            features[29] = np.exp(-m_h)
+            features[30] = np.sin(eg)
+            features[31] = np.cos(m_e)
+
+            # Fractional powers (32-36)
+            features[32] = m_e ** (1/3)
+            features[33] = m_h ** (1/3)
+            features[34] = eg ** (1/2) if eg > 0 else 0
+            features[35] = (m_e * eg) / (m_h + 1e-6)
+            features[36] = (m_h * eg) / (m_e + 1e-6)
+
+            # Combined terms (37-41)
+            features[37] = (m_e + m_h) * eg
+            features[38] = (m_e + m_h) / (eg + 1e-6)
+            features[39] = m_e * eg + m_h * eg
+            features[40] = m_e / (eg + 1e-6) + m_h / (eg + 1e-6)
+            features[41] = (m_e + m_h) * (eg ** 2)
+
+            # Log and mixed terms (42-44)
+            features[42] = np.log(1 + m_e * m_h)
+            features[43] = np.log(1 + eg * (m_e + m_h))
+            features[44] = (m_e * m_h) ** 0.75
+
     except Exception as e:
         pass
-    
+
     return np.nan_to_num(features, nan=0.0, posinf=0.0, neginf=0.0)
 
 # ============================================================================
@@ -136,48 +127,57 @@ def engineer_features(row, use_interactions=True):
 # ============================================================================
 
 def train_and_save_models():
-    """Train Phase 3 models on full DPT dataset and save them"""
-    
+    """Train models on materials with complete input features"""
+
     print("\n" + "="*80)
-    print("PHASE 3 PRODUCTION TRAINING - SAVE MODELS FOR INFERENCE")
+    print("PHASE 3 PRODUCTION TRAINING - NO DATA LEAKAGE")
     print("="*80 + "\n")
-    
-    # Load and filter data
+
+    # Load data
     print("[*] Loading dataset...")
     df = pd.read_csv(DATASET_PATH)
     print(f"[OK] Loaded {len(df)} total materials")
-    
-    print("\n[*] Filtering to DPT experimental data...")
-    df_dpt = df[df['source'].str.contains('DPT', case=False, na=False)].copy()
-    print(f"[OK] DPT materials: {len(df_dpt)}")
-    
+
+    # CRITICAL: Only use materials with COMPLETE input features
+    # Model needs: bandgap, effective_mass_e, effective_mass_h
+    print("\n[*] Filtering to materials with complete input features...")
+    print("    Required: bandgap, effective_mass_e, effective_mass_h")
+    df_complete = df.dropna(subset=[
+        'bandgap', 'effective_mass_e', 'effective_mass_h',
+        'electron_mobility', 'hole_mobility'
+    ]).copy()
+    print(f"[OK] Materials with complete data: {len(df_complete)}")
+
     print("\n[*] Removing outliers (mobility > 500,000 cm2/(V*s))...")
-    initial_count = len(df_dpt)
-    df_dpt = df_dpt[
-        (df_dpt['electron_mobility'] < MAX_MOBILITY_OUTLIER) &
-        (df_dpt['hole_mobility'] < MAX_MOBILITY_OUTLIER)
+    initial_count = len(df_complete)
+    df_complete = df_complete[
+        (df_complete['electron_mobility'] < MAX_MOBILITY_OUTLIER) &
+        (df_complete['hole_mobility'] < MAX_MOBILITY_OUTLIER)
     ].copy()
-    removed = initial_count - len(df_dpt)
-    print(f"[OK] Removed {removed} outliers, {len(df_dpt)} remaining")
-    
-    print("\n[*] Removing rows with missing mobility data...")
-    df_dpt = df_dpt.dropna(subset=['electron_mobility', 'hole_mobility'])
-    print(f"[OK] Final dataset: {len(df_dpt)} materials (clean DPT subset)")
+    removed = initial_count - len(df_complete)
+    print(f"[OK] Removed {removed} outliers, {len(df_complete)} remaining")
+
+    print(f"\n[OK] Final dataset: {len(df_complete)} materials with complete features")
+    print("\n    Data sources:")
+    for src, cnt in df_complete['source'].value_counts().items():
+        print(f"      - {src}: {cnt}")
     
     # Extract features
-    print("\n[*] Engineering 60D feature set with interaction terms...")
+    print("\n[*] Engineering 45D feature set (no target leakage)...")
     features_list = []
-    for idx, row in tqdm(df_dpt.iterrows(), total=len(df_dpt)):
+    for idx, row in tqdm(df_complete.iterrows(), total=len(df_complete)):
         feat = engineer_features(row, use_interactions=ENHANCE_FEATURES)
         features_list.append(feat)
     X = np.array(features_list)
     print(f"[OK] Feature matrix shape: {X.shape}")
-    
+
     # Log-transform targets
     print("\n[*] Preparing targets (log-transform for scale reduction)...")
-    y_electron = np.log(df_dpt['electron_mobility'].values)
-    y_hole = np.log(df_dpt['hole_mobility'].values)
+    y_electron = np.log(df_complete['electron_mobility'].values)
+    y_hole = np.log(df_complete['hole_mobility'].values)
     print(f"[OK] Targets ready (log-transformed)")
+    print(f"    Electron mobility range: {np.exp(y_electron.min()):.1f} - {np.exp(y_electron.max()):.1f} cm2/(V*s)")
+    print(f"    Hole mobility range: {np.exp(y_hole.min()):.1f} - {np.exp(y_hole.max()):.1f} cm2/(V*s)")
     
     # Standardize features
     print("\n[*] Standardizing features...")

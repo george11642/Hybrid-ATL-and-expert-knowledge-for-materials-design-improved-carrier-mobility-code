@@ -33,95 +33,80 @@ GB_HOLE_PATH = MODEL_DIR / "gradient_boosting_hole.joblib"
 # FEATURE ENGINEERING
 # ============================================================================
 
-def engineer_features_for_prediction(bandgap, m_e, m_h, mu_e=None, mu_h=None):
-    """Engineer 60D feature set for prediction"""
-    features = np.zeros(60)
-    
+def engineer_features_for_prediction(bandgap, m_e, m_h):
+    """
+    Engineer 45D feature set for prediction.
+
+    IMPORTANT: Only uses input variables (bandgap, m_e, m_h).
+    Does NOT use mobility values to avoid data leakage.
+    """
+    features = np.zeros(45)
+
     try:
-        # Handle None values with defaults
-        if mu_e is None:
-            mu_e = 1000  # placeholder
-        if mu_h is None:
-            mu_h = 1000  # placeholder
-        
-        # Basic 15 expert features
-        features[0] = bandgap
+        eg = bandgap
+
+        # Core features (0-11): Basic properties and ratios
+        features[0] = eg
         features[1] = m_e
         features[2] = m_h
-        features[3] = mu_e / (mu_h + 1e-6)
-        features[4] = m_e / (m_h + 1e-6)
-        features[5] = 1.0 / (m_e + m_h + 1e-6)
-        features[6] = bandgap ** 2
-        features[7] = m_e * m_h
-        features[8] = (m_e + m_h) / 2
-        features[9] = max(m_e, m_h) - min(m_e, m_h)
-        features[10] = bandgap * m_e
-        features[11] = bandgap * m_h
-        features[12] = bandgap / (m_e + m_h + 1e-6)
-        features[13] = np.log(mu_e + 1)
-        features[14] = np.log(mu_h + 1)
-        
-        # Interaction terms (features 15-60)
-        features[15] = bandgap * m_e * m_h
-        features[16] = bandgap ** 2 * m_e
-        features[17] = bandgap ** 2 * m_h
-        features[18] = bandgap / m_e
-        features[19] = bandgap / m_h
-        
-        features[20] = m_e ** 2
-        features[21] = m_h ** 2
-        features[22] = (m_e ** 2 + m_h ** 2) / 2
-        features[23] = (m_e * m_h) ** 0.5
-        features[24] = m_e / (m_h ** 2 + 1e-6)
-        
-        features[25] = mu_e / (m_e + 1e-6)
-        features[26] = mu_h / (m_h + 1e-6)
-        features[27] = mu_e * mu_h / ((m_e + m_h) ** 2 + 1e-6)
-        features[28] = np.log(mu_e * mu_h + 1)
-        features[29] = (mu_e + mu_h) / 2
-        
-        features[30] = bandgap ** 3
-        features[31] = m_e ** 3 + m_h ** 3
-        features[32] = (m_e + m_h) ** 2
-        features[33] = bandgap * (m_e + m_h) ** 2
-        features[34] = bandgap ** 2 / ((m_e + m_h) ** 2 + 1e-6)
-        
-        features[35] = 1.0 / (1.0 + np.exp(-bandgap))
-        features[36] = np.exp(-m_e)
-        features[37] = np.exp(-m_h)
-        features[38] = np.sin(bandgap)
-        features[39] = np.cos(m_e)
-        
-        features[40] = m_e ** (1/3)
-        features[41] = m_h ** (1/3)
-        features[42] = bandgap ** (1/2)
-        features[43] = (m_e * bandgap) / (m_h + 1e-6)
-        features[44] = (m_h * bandgap) / (m_e + 1e-6)
-        
-        features[45] = (m_e + m_h) * bandgap
-        features[46] = (m_e + m_h) / bandgap
-        features[47] = m_e * bandgap + m_h * bandgap
-        features[48] = m_e / bandgap + m_h / bandgap
-        features[49] = (m_e + m_h) * (bandgap ** 2)
-        
-        features[50] = m_e * np.exp(-bandgap)
-        features[51] = m_h * np.exp(-bandgap)
-        features[52] = bandgap * np.exp(-(m_e + m_h))
-        features[53] = (m_e + m_h) / np.log(bandgap + 1.01)
-        features[54] = bandgap / np.log(m_e + m_h + 1.01)
-        
-        features[55:60] = [
-            np.log(1 + m_e * m_h),
-            np.log(1 + bandgap * (m_e + m_h)),
-            bandgap ** 2.5,
-            (m_e + m_h) ** 1.5,
-            (m_e * m_h) ** 0.75
-        ]
-    
+        features[3] = m_e / (m_h + 1e-6)
+        features[4] = 1.0 / (m_e + m_h + 1e-6)
+        features[5] = eg ** 2
+        features[6] = m_e * m_h
+        features[7] = (m_e + m_h) / 2
+        features[8] = max(m_e, m_h) - min(m_e, m_h)
+        features[9] = eg * m_e
+        features[10] = eg * m_h
+        features[11] = eg / (m_e + m_h + 1e-6)
+
+        # Polynomial interactions (12-21)
+        features[12] = eg * m_e * m_h
+        features[13] = eg ** 2 * m_e
+        features[14] = eg ** 2 * m_h
+        features[15] = eg / (m_e + 1e-6)
+        features[16] = eg / (m_h + 1e-6)
+        features[17] = m_e ** 2
+        features[18] = m_h ** 2
+        features[19] = (m_e ** 2 + m_h ** 2) / 2
+        features[20] = (m_e * m_h) ** 0.5
+        features[21] = m_e / (m_h ** 2 + 1e-6)
+
+        # Higher order terms (22-26)
+        features[22] = eg ** 3
+        features[23] = m_e ** 3 + m_h ** 3
+        features[24] = (m_e + m_h) ** 2
+        features[25] = eg * (m_e + m_h) ** 2
+        features[26] = eg ** 2 / ((m_e + m_h) ** 2 + 1e-6)
+
+        # Nonlinear transforms (27-31)
+        features[27] = 1.0 / (1.0 + np.exp(-eg))
+        features[28] = np.exp(-m_e)
+        features[29] = np.exp(-m_h)
+        features[30] = np.sin(eg)
+        features[31] = np.cos(m_e)
+
+        # Fractional powers (32-36)
+        features[32] = m_e ** (1/3)
+        features[33] = m_h ** (1/3)
+        features[34] = eg ** (1/2) if eg > 0 else 0
+        features[35] = (m_e * eg) / (m_h + 1e-6)
+        features[36] = (m_h * eg) / (m_e + 1e-6)
+
+        # Combined terms (37-41)
+        features[37] = (m_e + m_h) * eg
+        features[38] = (m_e + m_h) / (eg + 1e-6)
+        features[39] = m_e * eg + m_h * eg
+        features[40] = m_e / (eg + 1e-6) + m_h / (eg + 1e-6)
+        features[41] = (m_e + m_h) * (eg ** 2)
+
+        # Log and mixed terms (42-44)
+        features[42] = np.log(1 + m_e * m_h)
+        features[43] = np.log(1 + eg * (m_e + m_h))
+        features[44] = (m_e * m_h) ** 0.75
+
     except Exception as e:
         print(f"[WARN] Feature engineering error: {e}")
-        pass
-    
+
     return np.nan_to_num(features, nan=0.0, posinf=0.0, neginf=0.0)
 
 # ============================================================================
