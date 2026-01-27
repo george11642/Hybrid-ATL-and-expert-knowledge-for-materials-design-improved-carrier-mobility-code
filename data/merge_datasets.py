@@ -30,7 +30,7 @@ def load_existing_dpt_data():
     print("LOADING EXISTING DPT DATA")
     print("="*70)
     
-    path = PROJECT_ROOT / 'DPTmobility.csv'
+    path = PROJECT_ROOT / 'data' / 'external' / 'DPTmobility.csv'
     
     if not path.exists():
         print(f"Warning: {path} not found")
@@ -55,7 +55,7 @@ def load_existing_epc_data():
     print("LOADING EXISTING EPC DATA")
     print("="*70)
     
-    path = PROJECT_ROOT / 'EPCmobility.csv'
+    path = PROJECT_ROOT / 'data' / 'external' / 'EPCmobility.csv'
     
     if not path.exists():
         print(f"Warning: {path} not found")
@@ -79,7 +79,7 @@ def load_etran2d_data():
     print("LOADING eTran2D DATA")
     print("="*70)
     
-    path = PROJECT_ROOT / 'data_acquisition' / 'etran2d_raw.csv'
+    path = PROJECT_ROOT / 'data' / 'raw' / 'etran2d_raw.csv'
     
     if not path.exists():
         print(f"Warning: {path} not found. Skipping eTran2D.")
@@ -99,7 +99,7 @@ def load_c2db_data():
     print("LOADING C2DB DATA")
     print("="*70)
 
-    path = PROJECT_ROOT / 'data_acquisition' / 'c2db_raw.csv'
+    path = PROJECT_ROOT / 'data' / 'raw' / 'c2db_raw.csv'
 
     if not path.exists():
         print(f"Warning: {path} not found. Skipping C2DB.")
@@ -120,7 +120,7 @@ def load_expanded_c2db_data():
     print("LOADING EXPANDED C2DB DATA")
     print("="*70)
 
-    path = PROJECT_ROOT / 'data_acquisition' / 'c2db_expanded.csv'
+    path = PROJECT_ROOT / 'data' / 'raw' / 'c2db_expanded.csv'
 
     if not path.exists():
         print(f"Warning: {path} not found. Skipping expanded C2DB.")
@@ -141,7 +141,7 @@ def load_group_iv_iv_data():
     print("LOADING GROUP IV-IV MATERIALS DATA")
     print("="*70)
 
-    path = PROJECT_ROOT / 'data_acquisition' / 'group_iv_iv_raw.csv'
+    path = PROJECT_ROOT / 'data' / 'raw' / 'group_iv_iv_raw.csv'
 
     if not path.exists():
         print(f"Warning: {path} not found. Skipping Group IV-IV.")
@@ -338,7 +338,7 @@ def validate_and_clean(df):
 def save_merged_dataset(df, output_path=None):
     """Save merged dataset to CSV."""
     if output_path is None:
-        output_path = PROJECT_ROOT / 'data_processed' / 'mobility_dataset_merged.csv'
+        output_path = PROJECT_ROOT / 'data' / 'processed' / 'mobility_dataset_merged.csv'
     
     # Ensure directory exists
     output_path.parent.mkdir(parents=True, exist_ok=True)
@@ -353,7 +353,7 @@ def save_merged_dataset(df, output_path=None):
 def generate_statistics_report(df, output_path=None):
     """Generate statistics report."""
     if output_path is None:
-        output_path = PROJECT_ROOT / 'data_processed' / 'dataset_statistics.txt'
+        output_path = PROJECT_ROOT / 'data' / 'processed' / 'dataset_statistics.txt'
     
     output_path.parent.mkdir(parents=True, exist_ok=True)
     

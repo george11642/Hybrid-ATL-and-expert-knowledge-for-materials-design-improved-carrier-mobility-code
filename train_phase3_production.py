@@ -26,7 +26,7 @@ warnings.filterwarnings('ignore')
 # CONFIGURATION
 # ============================================================================
 
-DATASET_PATH = "data_processed/mobility_dataset_merged.csv"
+DATASET_PATH = "data/processed/mobility_dataset_merged.csv"
 OUTPUT_DIR = "models/phase3"
 RESULTS_DIR = "evaluation/phase3"
 

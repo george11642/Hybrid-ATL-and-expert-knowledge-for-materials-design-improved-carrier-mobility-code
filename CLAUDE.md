@@ -6,7 +6,7 @@
 
 **Key Goal**: Predict mobility for **2D SiC monolayer** - a material with NO experimental data. The model must generalize from similar materials.
 
-**Current Status**: Production-ready with 257 materials, R² ~0.88 for electron mobility
+**Current Status**: Production-ready with 257 materials, R² = 0.912 for electron mobility (LOOCV)
 
 ## Critical Rules
 
@@ -35,18 +35,21 @@ mu = np.exp(prediction)               # For inference
 ## Project Structure
 
 ```
-├── data_acquisition/           # Data fetching scripts
-│   ├── c2db_raw.csv           # Original C2DB data (25 materials)
-│   ├── c2db_expanded.csv      # Expanded dataset (63 materials)
-│   ├── group_iv_iv_raw.csv    # Group IV-IV materials (10 materials)
-│   ├── fetch_expanded_c2db.py # Generates expanded data
-│   └── group_iv_iv_materials.py
+├── train_phase3_production.py      # Training script (excludes SiC)
+├── predict_mobility_production.py  # Prediction interface
+├── calculate_2d_sic_mobility.py    # DPT physics calculator
 │
-├── data_processing/
-│   └── merge_datasets.py      # Combines all data sources
-│
-├── data_processed/
-│   └── mobility_dataset_merged.csv  # Final training data (257 materials)
+├── data/
+│   ├── raw/                   # Raw data sources
+│   │   ├── c2db_expanded.csv  # 63 materials
+│   │   ├── etran2d_raw.csv    # 19 materials
+│   │   └── group_iv_iv_raw.csv # 10 materials (SiC family)
+│   ├── processed/
+│   │   └── mobility_dataset_merged.csv  # 257 materials
+│   ├── external/
+│   │   ├── DPTmobility.csv    # 197 materials
+│   │   └── EPCmobility.csv    # 38 materials
+│   └── merge_datasets.py      # Data processing
 │
 ├── models/phase3/             # Trained models
 │   ├── random_forest_electron.joblib
@@ -55,13 +58,13 @@ mu = np.exp(prediction)               # For inference
 │   ├── gradient_boosting_hole.joblib
 │   └── feature_scaler_phase3.joblib
 │
-├── train_phase3_production.py # Training script (excludes SiC)
-├── predict_mobility_production.py  # Prediction interface
-├── calculate_2d_sic_mobility.py    # DPT physics calculator
+├── docs/                      # Documentation
+│   ├── model_documentation.md
+│   ├── validation_summary.md
+│   └── changelog.md
 │
-├── DPTmobility.csv            # 197 materials from literature
-├── EPCmobility.csv            # 38 experimental materials
-└── VALIDATION_SUMMARY.md      # Data quality documentation
+├── evaluation/                # Results & figures
+└── _archive/                  # Old development files
 ```
 
 ## Common Tasks
@@ -76,17 +79,17 @@ This automatically excludes SiC from training data.
 ```bash
 python predict_mobility_production.py
 ```
-Current prediction: μ_e = 144.5 cm²/(V·s), μ_h = 107.1 cm²/(V·s)
+Current prediction: μ_e = 141.7 ± 9.5 cm²/(V·s), μ_h = 121.2 ± 2.1 cm²/(V·s)
 
 ### Regenerate Dataset
 ```bash
-python data_acquisition/fetch_expanded_c2db.py
-python data_acquisition/group_iv_iv_materials.py
-python data_processing/merge_datasets.py
+python data/raw/fetch_expanded_c2db.py
+python data/raw/group_iv_iv_materials.py
+python data/merge_datasets.py
 ```
 
 ### Add New Materials
-1. Add to appropriate CSV in `data_acquisition/`
+1. Add to appropriate CSV in `data/raw/`
 2. Run merge script
 3. Retrain models
 
@@ -150,7 +153,7 @@ exp() → Mobility (cm²/V·s)
 
 1. **Outliers**: Some materials have μ > 10⁶ cm²/Vs (semimetals). Filter with `MAX_MOBILITY_OUTLIER = 500000`
 
-2. **Missing Data**: Only 71/257 materials have complete bandgap + effective mass data. Others used for validation only.
+2. **Missing Data**: Only 70/257 materials have complete bandgap + effective mass data. Others used for validation only.
 
 3. **Unit Consistency**: All mobility in cm²/(V·s). DPTmobility.csv uses 10³ units - converted in merge script.
 
@@ -181,5 +184,6 @@ predict_mobility("WS2", bandgap=1.97, m_e=0.28, m_h=0.39)
 ## Contact & Files
 
 - Main documentation: README.md
-- Validation details: VALIDATION_SUMMARY.md
-- DFT requirements: DFT_BTE_REQUIREMENTS.md
+- Validation details: docs/validation_summary.md
+- DFT requirements: docs/dft_bte_requirements.md
+- Changelog: docs/changelog.md
